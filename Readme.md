@@ -9,12 +9,13 @@ The contract is deployed at:
 
 ### Interaction with the contract
 
-[] An address/user can vote for proposal (binary) 1=no, 2=yes.
-[] An contract instance should get votesForYes
-[] An contract instance should get votesForNo
-[] An contract instance should querying past events VoteCasted
+- [] An address/user can vote for proposal (binary) 1=no, 2=yes.
+- [] An contract instance should get votesForYes
+- [] An contract instance should get votesForNo
+- [] An contract instance should querying past events VoteCasted
 
 ### Web App
 
-[] The users can see the resume votesForYes vs votesForNo.
-[] The users can see the list of votes emited with address and vote
+- [] The users can see the resume votesForYes vs votesForNo.
+- [] The users can see the list of votes cast, showing address and vote
+- [] Users can vote once by paying 0.01 ether through metamask provider
