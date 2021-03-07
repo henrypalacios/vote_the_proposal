@@ -1,0 +1,97 @@
+{
+  "bytecode": "608060405234801561001057600080fd5b50610544806100206000396000f3fe6080604052600436106100705760003560e01c80637ef4aa7b1161004e5780637ef4aa7b146100f95780638d337b8114610124578063a07d03dd14610189578063fc4333cd146101b457610070565b80630121b93f146100755780632dfca445146100a35780636f6cbee4146100ce575b600080fd5b6100a16004803603602081101561008b57600080fd5b81019080803590602001909291905050506101cb565b005b3480156100af57600080fd5b506100b861044f565b6040518082815260200191505060405180910390f35b3480156100da57600080fd5b506100e3610455565b6040518082815260200191505060405180910390f35b34801561010557600080fd5b5061010e61045b565b6040518082815260200191505060405180910390f35b34801561013057600080fd5b506101736004803603602081101561014757600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610466565b6040518082815260200191505060405180910390f35b34801561019557600080fd5b5061019e6104c1565b6040518082815260200191505060405180910390f35b3480156101c057600080fd5b506101c96104c7565b005b60018114806101da5750600281145b61022f576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260248152602001806104ec6024913960400191505060405180910390fd5b6000806000600154815260200190815260200160002060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054146102f6576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260158152602001807f4164647265737320616c726561647920766f746564000000000000000000000081525060200191505060405180910390fd5b662386f26fc100003414610372576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601e8152602001807f596f75206d7573742073656e6420302e30312045544820746f20766f7465000081525060200191505060405180910390fd5b80600080600154815260200190815260200160002060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555060018114156103e8576003600081548092919060010191905055506103fb565b6002600081548092919060010191905055505b3373ffffffffffffffffffffffffffffffffffffffff166001547fe7ee74ca1f4bb1b82b14f87794c45b3e59c39e372b862fb97a6316b43355b69e836040518082815260200191505060405180910390a350565b60015481565b60025481565b662386f26fc1000081565b6000806000600154815260200190815260200160002060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020549050919050565b60035481565b6001600081548092919060010191905055506000600381905550600060028190555056fe43616e206f6e6c7920766f74652077697468203120286e6f29206f722032202879657329a265627a7a72315820b5ba4287a53495f6c0dae0244e6d6cfea1d7cce0021f6aba544f64353982d28664736f6c63430005100032",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "proposalId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "vote",
+          "type": "uint256"
+        }
+      ],
+      "name": "VoteCasted",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "VOTE_FEE",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "clean",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        { "internalType": "address", "name": "_user", "type": "address" }
+      ],
+      "name": "getVote",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "proposalId",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        { "internalType": "uint256", "name": "_vote", "type": "uint256" }
+      ],
+      "name": "vote",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "votesForNo",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "votesForYes",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

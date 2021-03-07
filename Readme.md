@@ -9,10 +9,11 @@ The contract is deployed at:
 
 ### Interaction with the contract
 
-- [] An address/user can vote for proposal (binary) 1=no, 2=yes.
-- [] An contract instance should get votesForYes
-- [] An contract instance should get votesForNo
-- [] An contract instance should querying past events VoteCasted
+- [x] An address/user can vote for proposal (binary) 1=no, 2=yes.
+- [x] An contract instance should get votesForYes
+- [x] An contract instance should get votesForNo
+- [x] An contract instance should querying past events VoteCasted
+- [] migrate querys from test to ContractAPI
 
 ### Web App
 
