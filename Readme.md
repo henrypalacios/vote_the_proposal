@@ -17,6 +17,6 @@ The contract is deployed at:
 
 ### Web App
 
+- [] Users can vote once by paying 0.01 ether through metamask provider
 - [] The users can see the resume votesForYes vs votesForNo.
 - [] The users can see the list of votes cast, showing address and vote
-- [] Users can vote once by paying 0.01 ether through metamask provider

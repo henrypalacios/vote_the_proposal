@@ -91,7 +91,6 @@ describe("ProposalTest", () => {
       });
 
       events.reduce((accumulator, element) => {
-        console.log(element.returnValues);
         if (element.returnValues["vote"] == VOTE["yes"]) {
           votesCount["yes"] += 1;
         } else if (element.returnValues["vote"] == VOTE["no"]) {
