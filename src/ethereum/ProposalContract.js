@@ -1,21 +1,14 @@
 import { Contract } from "ethers";
 
 import ProposalCompiled from "./ProposalCompiled.json";
-import { Networks } from "./connectors";
+import { getProposalAddress } from "./utils";
 
 /**
  * @param {Web3Provider} library
  * @param {int} networkId
  **/
 const ProposalContract = (library, networkId) => {
-  const contractAddress = Object.keys(Networks).reduce((acc, ele) => {
-    if (Networks[ele].id == networkId) {
-      acc = Networks[ele].address;
-    }
-    return acc;
-  }, "");
-
-  console.log(library.getSigner());
+  const contractAddress = getProposalAddress(networkId);
 
   const contract = new Contract(
     contractAddress,

@@ -13,11 +13,11 @@ The contract is deployed at:
 - [x] An contract instance should get votesForYes
 - [x] An contract instance should get votesForNo
 - [x] An contract instance should querying past events VoteCasted
-- [ ] migrate querys from test to ContractAPI
 
 ### Web App
 
 - [x] Users can vote once by paying 0.01 ether through metamask provider
   - [ ] Handle the exception when the user has voted
-- [ ] The users can see the resume votesForYes vs votesForNo.
+- [x] The users can see the resume votesForYes vs votesForNo.
 - [ ] The users can see the list of votes cast, showing address and vote
+- [ ] The Counters and Votes List must be updated in real time
