@@ -1,13 +1,15 @@
 import { InjectedConnector } from "@web3-react/injected-connector";
 
 export const Networks = {
-  MainNet: 1,
-  Ropsten: 3,
-  Rinkeby: 4,
-  Goerli: 5,
-  Kovan: 42,
+  Rinkeby: { id: 4, address: "0x3d7c4042365d04c98f58906966ca4c816acf592a" },
+  Ganache: { id: 1337, address: "0x9d9B9f97768581D74fAf28928176CbCAcA89827e" },
 };
 
-const connector = new InjectedConnector({ supportedChainIds: [4] });
+const connector = new InjectedConnector({
+  supportedChainIds: [Networks.Rinkeby.id, Networks.Ganache.id],
+  urls: {
+    1337: "http://localhost:8545",
+  },
+});
 
 export default connector;

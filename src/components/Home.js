@@ -4,8 +4,8 @@ import { useWeb3React } from "@web3-react/core";
 import Layout from "./layouts/Layout";
 
 function Home() {
-  const { library } = useWeb3React();
-  console.log(library);
+  const web3 = useWeb3React();
+
   return (
     <Layout>
       <h3>Home</h3>

@@ -8,14 +8,14 @@ import LoaderOverlap from "./components/elements/LoaderOverlap";
 import ErrorSegment from "./components/elements/ErrorSegment";
 
 function App() {
-  const { active, activate, library, error } = useWeb3React();
+  const { active, activate, library, error, chainId } = useWeb3React();
+  const web3 = useWeb3React();
 
   useEffect(() => {
     if (!active) {
-      console.log(injectedConnector);
       activate(injectedConnector);
     }
-  }, [active, library, activate]);
+  }, [active, library, activate, chainId]);
 
   const renderContent = () => {
     let content = (
@@ -25,6 +25,7 @@ function App() {
     if (active) {
       content = <Home />;
     } else if (error) {
+      console.error(error);
       content = <ErrorSegment />;
     }
 

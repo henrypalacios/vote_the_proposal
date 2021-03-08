@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useRef, forwardRef, useImperativeHandle } from "react";
 import { Button, Icon, Image, Modal } from "semantic-ui-react";
 
-function ModalScrollingExample(props) {
+function ModalScrolling(props) {
   const [open, setOpen] = React.useState(false);
+
+  const successfulAction = () => {
+    setOpen(false);
+  };
+
+  const childrenWithProps = React.Children.map(props.children, (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        successfulAction,
+      });
+    }
+
+    return child;
+  });
 
   return (
     <Modal
@@ -10,24 +24,20 @@ function ModalScrollingExample(props) {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       trigger={props.trigger}
+      closeIcon
     >
       <Modal.Header>{props.textHeader}</Modal.Header>
       <Modal.Content>
-        <Modal.Description>{props.children}</Modal.Description>
+        <Modal.Description>{childrenWithProps}</Modal.Description>
       </Modal.Content>
-      <Modal.Actions>
-        <Button primary onClick={() => setOpen(false)}>
-          {props.textAction} <Icon name="right chevron" />
-        </Button>
-      </Modal.Actions>
     </Modal>
   );
 }
 
-ModalScrollingExample.defaultProps = {
+ModalScrolling.defaultProps = {
   trigger: <Button>Open Modal</Button>,
   textAction: "Proceed",
   textHeader: "Modal Header",
 };
 
-export default ModalScrollingExample;
+export default ModalScrolling;
