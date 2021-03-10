@@ -25,10 +25,12 @@ const VotingForm = (props) => {
       await contractProposal.vote(vote, {
         value,
       });
-      setSuccessMsg("You will redirect to Home!");
+      setSuccessMsg(
+        "Your transaction has been signed and will appear on the blockhain in an instant."
+      );
       setTimeout(() => {
         props.successfulAction();
-      }, 1000);
+      }, 6000);
     } catch (e) {
       setErrorMsg(e.message);
     }

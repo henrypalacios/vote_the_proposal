@@ -38,9 +38,7 @@ export const atLeastUntil500k = async (library, networkId, atLeastRows) => {
     fromBlock
   );
 
-  console.log(rows);
-
-  return rows;
+  return rows.splice(0, 99);
 };
 
 export const proposalFilterLogs = async (

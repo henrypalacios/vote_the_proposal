@@ -10,7 +10,9 @@ import {
 } from "semantic-ui-react";
 import { useWeb3React } from "@web3-react/core";
 
-import { atLeastUntil500k } from "../ethereum/ProposalContract";
+import ProposalContract, {
+  atLeastUntil500k,
+} from "../ethereum/ProposalContract";
 
 const VoteRow = ({ vote }) => {
   const type_vote = parseInt(vote.vote);
@@ -46,19 +48,34 @@ function VotesList() {
   let lastRecords = [];
 
   useEffect(() => {
+    setLoading(true);
     (async () => {
-      setLoading(true);
-      try {
-        lastRecords = await atLeastUntil500k(library, chainId);
-      } catch (e) {
-        console.error(e);
-      }
+      await getLatestVotes();
+    })();
 
+    const proposalContract = ProposalContract(library, chainId);
+    proposalContract.on("VoteCasted", () => {
+      if (loading) {
+        return;
+      }
+      setLoading(true);
+      getLatestVotes();
+      setLoading(false);
+    });
+
+    setLoading(false);
+    return () => proposalContract.removeAllListeners("VoteCasted");
+  }, [chainId]);
+
+  const getLatestVotes = async () => {
+    try {
+      lastRecords = await atLeastUntil500k(library, chainId);
       setVotes(lastRecords);
       setVotesCount(lastRecords.length);
-      setLoading(false);
-    })();
-  }, [chainId]);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const renderRows = () => {
     return votes.map((vote, index) => {
