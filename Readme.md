@@ -19,5 +19,9 @@ The contract is deployed at:
 - [x] Users can vote once by paying 0.01 ether through metamask provider
   - [ ] Handle the exception when the user has voted
 - [x] The users can see the resume votesForYes vs votesForNo.
+<<<<<<< HEAD
 - [ ] The users can see the list of votes cast, showing address and vote
+=======
+- [x] The users can see the list of votes cast, showing address and vote
+>>>>>>> features
 - [ ] The Counters and Votes List must be updated in real time

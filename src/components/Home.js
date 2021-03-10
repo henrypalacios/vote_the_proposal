@@ -6,6 +6,7 @@ import { Card, Grid } from "semantic-ui-react";
 import Layout from "./layouts/Layout";
 import { getProposalAddress } from "../ethereum/utils";
 import ProposalContract from "../ethereum/ProposalContract";
+import VotesList from "./VotesList";
 
 function Home() {
   const { chainId, library } = useWeb3React();
@@ -30,7 +31,6 @@ function Home() {
         });
       } catch (e) {
         console.error(e);
-        /* handle error */
       }
     })();
   }, []);
@@ -71,10 +71,16 @@ function Home() {
 
   return (
     <Layout>
-      <h3>Home</h3>
+      <h2>Home</h2>
       <Grid relaxed>
         <Grid.Row>
           <Grid.Column width={16}>{renderCards()}</Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <h3>Votes List (until the last 500k blocks)</h3>
+            <VotesList />
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     </Layout>

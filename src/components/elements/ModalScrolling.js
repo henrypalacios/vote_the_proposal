@@ -38,6 +38,7 @@ ModalScrolling.defaultProps = {
   trigger: <Button>Open Modal</Button>,
   textAction: "Proceed",
   textHeader: "Modal Header",
+  onAction: () => console.log("OnAction"),
 };
 
 export default ModalScrolling;
