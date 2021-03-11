@@ -21,9 +21,6 @@ const SummaryVoteCount = () => {
     })();
 
     proposalContract.on("VoteCasted", () => {
-      if (loading) {
-        return;
-      }
       setLoading(true);
       getVotesCount();
       setLoading(false);

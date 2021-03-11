@@ -1,3 +1,11 @@
+all: deploy
+
+deploy: install start
+
+install:
+	@echo "Installing..."
+	npm install
+
 .PHONY: test
 test:
 	@echo "🏃 Running contract tests"

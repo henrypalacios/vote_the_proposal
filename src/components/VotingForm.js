@@ -4,6 +4,7 @@ import { useWeb3React } from "@web3-react/core";
 import { utils } from "ethers";
 
 import ProposalContract, { VOTE_FEE, VOTE } from "../ethereum/ProposalContract";
+import { inString } from "../ethereum/utils";
 
 const VotingForm = (props) => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -32,7 +33,11 @@ const VotingForm = (props) => {
         props.successfulAction();
       }, 6000);
     } catch (e) {
-      setErrorMsg(e.message);
+      let msg = e.message;
+      if (inString(msg, "execution reverted: Address already voted")) {
+        msg = "execution reverted: Address already voted";
+      }
+      setErrorMsg(msg);
     }
 
     setLoading(false);

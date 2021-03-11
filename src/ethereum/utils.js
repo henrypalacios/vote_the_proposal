@@ -33,3 +33,9 @@ export const repeatListNTimes = (value, len) => {
   if (a.length < len) a = a.concat(a.slice(0, len - a.length));
   return a;
 };
+
+export const inString = (myString, word) => {
+  var regex = new RegExp("\\b" + word + "\\b");
+  var result = regex.test(myString);
+  return result;
+};
