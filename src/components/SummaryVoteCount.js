@@ -3,48 +3,35 @@ import { Card, Loader } from "semantic-ui-react";
 import { useWeb3React } from "@web3-react/core";
 
 import { getProposalAddress } from "../ethereum/utils";
-import ProposalContract from "../ethereum/ProposalContract";
+import ProposalContract, { getVotesCount } from "../ethereum/proposal_contract";
 
 const SummaryVoteCount = () => {
   const { chainId, library } = useWeb3React();
   const [votesCount, setVotesCount] = useState({ no: 0, yes: 0, total: 0 });
   const [loading, setLoading] = useState(false);
   const contractAddress = getProposalAddress(chainId);
-  let proposalContract;
 
   useEffect(() => {
-    proposalContract = ProposalContract(library, chainId);
-    setLoading(true);
-
     (async () => {
-      await getVotesCount();
+      await fetchVotesCount();
     })();
 
+    const proposalContract = ProposalContract(library, chainId);
     proposalContract.on("VoteCasted", () => {
-      setLoading(true);
-      getVotesCount();
-      setLoading(false);
+      fetchVotesCount();
     });
 
-    setLoading(false);
     return () => proposalContract.removeAllListeners("VoteCasted");
   }, [chainId]);
 
-  const getVotesCount = async () => {
-    try {
-      const requests = await Promise.all(
-        ["votesForNo", "votesForYes"].map((ele, i) => proposalContract[ele]())
-      );
-      const votesNo = parseInt(requests[0]);
-      const votesYes = parseInt(requests[1]);
-      setVotesCount({
-        no: votesNo,
-        yes: votesYes,
-        total: votesNo + votesYes,
-      });
-    } catch (e) {
-      console.error(e);
+  const fetchVotesCount = async () => {
+    setLoading(true);
+    const { data, error } = await getVotesCount(library, chainId);
+    if (!error) {
+      setVotesCount(data);
     }
+
+    setLoading(false);
   };
 
   const calculatePercentegeVotes = (typeVote) => {

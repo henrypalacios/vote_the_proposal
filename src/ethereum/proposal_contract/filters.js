@@ -1,28 +1,8 @@
-import { constants, Contract, utils } from "ethers";
-import ProposalCompiled from "./ProposalCompiled.json";
+import { utils } from "ethers";
 
-import { getProposalAddress, getProposalContractData } from "./utils";
+import { getProposalContractData, ProposalCompiled } from "./index";
 
-/**
- * @param {Web3Provider} library
- * @param {int} networkId
- **/
-const ProposalContract = (library, networkId) => {
-  const contractAddress = getProposalAddress(networkId);
-
-  const contract = new Contract(
-    contractAddress,
-    ProposalCompiled.abi,
-    library.getSigner()
-  );
-
-  return contract;
-};
-
-export const VOTE = { no: 1, yes: 2 };
-export const VOTE_FEE = 0.01;
-
-export const atLeastUntil500k = async (library, networkId, atLeastRows) => {
+export const filterUntilBlock = async (library, networkId, atLeastRows) => {
   let rows = [];
   const topic = "VoteCasted(uint256,address,uint256)";
   const contractData = getProposalContractData(networkId);
@@ -51,7 +31,7 @@ export const proposalFilterLogs = async (
   const contractData = getProposalContractData(networkId);
   const iface = new utils.Interface(ProposalCompiled.abi);
 
-  console.log("from:", fromBlock, "to:", toBlock);
+  console.debug("from:", fromBlock, "to:", toBlock);
   if (toBlock == "undefined") {
     console.log("entre");
     const latestBlock = await library.getBlockNumber();
@@ -81,5 +61,3 @@ export const proposalFilterLogs = async (
 
   return decodedEvents;
 };
-
-export default ProposalContract;

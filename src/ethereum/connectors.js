@@ -1,4 +1,3 @@
-import { NetworkConnector } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
 
 export const Networks = {

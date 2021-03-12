@@ -3,42 +3,36 @@ import { Form, Input, Message, Button, Icon, Grid } from "semantic-ui-react";
 import { useWeb3React } from "@web3-react/core";
 import { utils } from "ethers";
 
-import ProposalContract, { VOTE_FEE, VOTE } from "../ethereum/ProposalContract";
-import { inString } from "../ethereum/utils";
+import ProposalContract, { createVote } from "../ethereum/proposal_contract";
 
 const VotingForm = (props) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const [vote, setVote] = useState(VOTE["no"]);
+  const [vote, setVote] = useState(ProposalContract.VOTE["no"]);
   const { library, chainId } = useWeb3React();
-  let contractProposal;
+  const voteFee = ProposalContract.VOTE_FEE;
 
   const onSubmit = async (event) => {
     setLoading(true);
     setErrorMsg("");
     setSuccessMsg("");
 
-    const value = utils.parseEther(VOTE_FEE.toString(), "ether");
-    contractProposal = ProposalContract(library, chainId);
+    const value = utils.parseEther(voteFee.toString(), "ether");
 
-    try {
-      await contractProposal.vote(vote, {
-        value,
-      });
-      setSuccessMsg(
-        "Your transaction has been signed and will appear on the blockhain in an instant."
-      );
-      setTimeout(() => {
-        props.successfulAction();
-      }, 6000);
-    } catch (e) {
-      let msg = e.message;
-      if (inString(msg, "execution reverted: Address already voted")) {
-        msg = "execution reverted: Address already voted";
-      }
-      setErrorMsg(msg);
+    const { data, error } = await createVote(library, chainId, vote, value);
+    if (error) {
+      setErrorMsg(error);
+      setLoading(false);
+      return;
     }
+
+    setSuccessMsg(
+      "Your transaction has been signed and will appear on the blockhain in an instant."
+    );
+    setTimeout(() => {
+      props.successfulAction();
+    }, 6000);
 
     setLoading(false);
   };
@@ -64,7 +58,7 @@ const VotingForm = (props) => {
       <Form.Group inline>
         <label htmlFor="contribution">Amount required to vote</label>
         <Input
-          value={VOTE_FEE}
+          value={voteFee}
           name="contribution"
           label="ether"
           labelPosition="right"

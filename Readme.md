@@ -53,7 +53,7 @@ npm install && npm run start
 
 ### Maybe
 
-- [ ] Refactoring Code Proposal Contract
+- [x] Refactoring Code Proposal Contract
 - [x] Handle the exception when the user has voted
 - [ ] Add Some tests
 - [ ] Add Pagination View

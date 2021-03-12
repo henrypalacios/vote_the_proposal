@@ -11,8 +11,8 @@ import {
 import { useWeb3React } from "@web3-react/core";
 
 import ProposalContract, {
-  atLeastUntil500k,
-} from "../ethereum/ProposalContract";
+  filterUntilBlock,
+} from "../ethereum/proposal_contract";
 
 const VoteRow = ({ vote }) => {
   const type_vote = parseInt(vote.vote);
@@ -48,33 +48,29 @@ function VotesList() {
   let lastRecords = [];
 
   useEffect(() => {
-    setLoading(true);
     (async () => {
-      await getLatestVotes();
+      await fetchLatestVotes();
     })();
 
     const proposalContract = ProposalContract(library, chainId);
     proposalContract.on("VoteCasted", () => {
-      if (loading) {
-        return;
-      }
-      setLoading(true);
-      getLatestVotes();
-      setLoading(false);
+      fetchLatestVotes();
     });
 
-    setLoading(false);
     return () => proposalContract.removeAllListeners("VoteCasted");
   }, [chainId]);
 
-  const getLatestVotes = async () => {
+  const fetchLatestVotes = async () => {
+    setLoading(true);
     try {
-      lastRecords = await atLeastUntil500k(library, chainId);
+      lastRecords = await filterUntilBlock(library, chainId, 500000);
       setVotes(lastRecords);
       setVotesCount(lastRecords.length);
     } catch (e) {
       console.error(e);
     }
+
+    setLoading(false);
   };
 
   const renderRows = () => {

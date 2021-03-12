@@ -22,11 +22,11 @@ function App() {
       <LoaderOverlap>Loading Ethereum Network provider...</LoaderOverlap>
     );
 
-    if (active) {
-      content = <Home />;
-    } else if (error) {
-      console.error(error);
+    if (error) {
       content = <ErrorSegment />;
+      console.error(error);
+    } else if (active) {
+      content = <Home />;
     }
 
     return content;
