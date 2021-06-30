@@ -5,7 +5,7 @@ import { providers } from "ethers";
 
 import App from "./App";
 
-const getLibrary = (provider) => {
+const getLibrary = (provider: any) => {
   const library = new providers.Web3Provider(provider);
   library.pollingInterval = 12000;
 

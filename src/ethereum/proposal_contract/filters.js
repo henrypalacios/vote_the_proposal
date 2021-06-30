@@ -32,7 +32,7 @@ export const proposalFilterLogs = async (
   const iface = new utils.Interface(ProposalCompiled.abi);
 
   console.debug("from:", fromBlock, "to:", toBlock);
-  if (toBlock == "undefined") {
+  if (toBlock === undefined) {
     console.log("entre");
     const latestBlock = await library.getBlockNumber();
     toBlock = latestBlock;
@@ -40,7 +40,7 @@ export const proposalFilterLogs = async (
 
   const filter = {
     address: contractData.address,
-    fromBlock: fromBlock == "undefined" ? toBlock : fromBlock,
+    fromBlock: fromBlock === undefined ? toBlock : fromBlock,
     toBlock: toBlock,
     topics: [utils.keccak256(utils.toUtf8Bytes(topic))],
   };

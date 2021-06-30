@@ -9,7 +9,6 @@ import ErrorSegment from "./components/elements/ErrorSegment";
 
 function App() {
   const { active, activate, library, error, chainId } = useWeb3React();
-  const web3 = useWeb3React();
 
   useEffect(() => {
     if (!active) {
